@@ -1,0 +1,261 @@
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/llz162652/COAv1.5/main/By.pop.cat.kun/COAJBuiui"))()
+local LBLG = Instance.new("ScreenGui", getParent)
+local LBL = Instance.new("TextLabel", getParent)
+local player = game.Players.LocalPlayer
+
+LBLG.Name = "LBLG"
+LBLG.Parent = game.CoreGui
+LBLG.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+LBLG.Enabled = true
+LBL.Name = "LBL"
+LBL.Parent = LBLG
+LBL.BackgroundColor3 = Color3.new(1, 1, 1)
+LBL.BackgroundTransparency = 1
+LBL.BorderColor3 = Color3.new(0, 0, 0)
+LBL.Position = UDim2.new(0.75,0,0.010,0)
+LBL.Size = UDim2.new(0, 133, 0, 30)
+LBL.Font = Enum.Font.GothamSemibold
+LBL.Text = "TextLabel"
+LBL.TextColor3 = Color3.new(1, 1, 1)
+LBL.TextScaled = true
+LBL.TextSize = 14
+LBL.TextWrapped = true
+LBL.Visible = true
+
+local FpsLabel = LBL
+local Heartbeat = game:GetService("RunService").Heartbeat
+local LastIteration, Start
+local FrameUpdateTable = { }
+
+local function HeartbeatUpdate()
+	LastIteration = tick()
+	for Index = #FrameUpdateTable, 1, -1 do
+		FrameUpdateTable[Index + 1] = (FrameUpdateTable[Index] >= LastIteration - 1) and FrameUpdateTable[Index] or nil
+	end
+	FrameUpdateTable[1] = LastIteration
+	local CurrentFPS = (tick() - Start >= 1 and #FrameUpdateTable) or (#FrameUpdateTable / (tick() - Start))
+	CurrentFPS = CurrentFPS - CurrentFPS % 1
+	FpsLabel.Text = ("此版本为Beta版本后续会将时间删除:"..os.date("%H").."时"..os.date("%M").."分"..os.date("%S"))
+end
+Start = tick()
+Heartbeat:Connect(HeartbeatUpdate)
+
+local Window = OrionLib:MakeWindow({
+   Name = "[COA(suture)beta]Nyano_Lua", 
+   HidePremium = false,
+   IntroText = "Nyano_AimBot_Lua beta v1"
+})
+
+local about = Window:MakeTab({
+    Name = "Nyano制作",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+about:AddParagraph("此版本为beta版本 更新后的脚本将在2010 1群发布")
+about:AddParagraph("此版本为PC版本 移动端暂时不适用")
+about:AddParagraph("您的用户名:"," "..game.Players.LocalPlayer.Name.."")
+about:AddParagraph("您的注入器:"," "..identifyexecutor().."")
+about:AddParagraph("您当前服务器的ID"," "..game.GameId.."")
+about:AddParagraph("Nyano_AimBot_Lua Beta v1")
+about:AddParagraph("该脚本免费")
+about:AddParagraph("作者:2010_Nyano")
+about:AddParagraph("作者QQ：3570431729")
+
+local Tab =Window:MakeTab({
+    Name = "通用",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+    Name = "反挂机V2",
+    Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/9fFu43FF"))()
+    end
+})
+
+Tab:AddButton({
+    Name = "防踢",
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Anti-Kick/main/Anti%20Kick.lua"))()
+    end
+})
+
+Tab:AddTextbox({
+	Name = "移动速度",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+	end
+})
+
+Tab:AddTextbox({
+	Name = "跳跃高度",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+	end
+})
+
+Tab:AddTextbox({
+        Name = "重力设置",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+	game.Workspace.Gravity = Value
+	end
+})
+
+Tab:AddButton({
+	Name = "帧率显示",
+	Callback = function()
+        -- Gui to Lua 
+-- Version: 3.2 
+-- 翻译：Nyano
+  
+-- Instances:
+ local ScreenGui = Instance.new("ScreenGui") 
+ local FpsLabel = Instance.new("TextLabel")
+ 
+--Properties:
+ 
+ ScreenGui.Name = "FPSGui" 
+ ScreenGui.ResetOnSpawn = false 
+ ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling 
+ 
+ FpsLabel.Name = "FPSLabel" 
+ FpsLabel.Size = UDim2.new(0, 100, 0, 50) 
+ FpsLabel.Position = UDim2.new(0, 10, 0, 10) 
+ FpsLabel.BackgroundTransparency = 1 
+ FpsLabel.Font = Enum.Font.SourceSansBold 
+ FpsLabel.Text = "帧率: 0" 
+ FpsLabel.TextSize = 20 
+ FpsLabel.TextColor3 = Color3.new(1, 1, 1) 
+ FpsLabel.Parent = ScreenGui 
+  
+ function updateFpsLabel() 
+     local fps = math.floor(1 / game:GetService("RunService").RenderStepped:Wait()) 
+     FpsLabel.Text = "帧率: " .. fps 
+ end 
+  
+  game:GetService("RunService").RenderStepped:Connect(updateFpsLabel) 
+  
+ ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+
+ animateCredits()
+        end
+})
+
+Tab:AddButton({
+  Name = "范围设置（中文）",
+  Callback = function ()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/llz162652/COAv1.5/main/By.pop.cat.kun/pop.cat.kun%E7%BF%BB%E8%AF%91%E7%A2%B0%E6%92%9E%E7%AE%B1%E8%AE%BE%E7%BD%AE"))()
+  end
+})
+
+Tab:AddButton({
+	Name = "吸人",
+	Callback = function()
+     loadstring(game:HttpGet('https://pastebin.com/raw/hQSBGsw2'))()
+  	end
+})
+
+Tab:AddButton({
+	Name = "飞行V3（隐藏）",
+	Callback = function()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/llz162652/COAv1.5.3/main/By.pop.cat.kun/COA%E9%A3%9E%E8%A1%8C"))()
+  	end
+})
+
+Tab:AddButton({
+    Name = "无限跳",
+	Callback = function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/V5PQy3y0", true))()
+	end
+})
+
+Tab:AddButton({
+    Name="立即死亡",
+    Callback=function()
+    game.Players.LocalPlayer.Character.Humanoid.Health=0
+    end
+})
+
+Tab:AddButton({
+	Name = "跟踪玩家",
+	Callback = function()
+      	loadstring(game:HttpGet("https://pastebin.com/raw/F9PNLcXk"))()
+  	end
+})
+
+local Tab =Window:MakeTab({
+	Name = "关于作者",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "复制作者QQ",
+	Callback = function()
+     setclipboard("3570431729")
+  	end
+})
+
+local Tab =Window:MakeTab({
+	Name = "Counter Blox_aimbot&esp",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "DeleteMod[(自瞄&透视)此脚本还未翻译]",
+	Callback = function()
+      	loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Hyper-Escape/main/DeleteMobV2.lua", true))()
+  	end
+})
+
+Tab:AddButton({
+	Name = "CBlox交战_无后座",
+	Callback = function()
+      	loadstring(game:HttpGet("https://raw.githubusercontent.com/SaBoi1114514/cbzimiao/refs/heads/main/cblox_wuhou", true))()
+  	end
+})
+
+local Tab =Window:MakeTab({
+	Name = "Ohio_aimbot&esp",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "ohio通用高级自瞄",
+	Callback = function()
+      	loadstring(game:HttpGet("https://raw.githubusercontent.com/SaBoi1114514/cbzimiao/refs/heads/main/ohioGODAimbot", true))()
+  	end
+})
+
+Tab:AddButton({
+	Name = "KAT范围锁头",
+	Callback = function()
+      	loadstring(game:HttpGet("https://raw.githubusercontent.com/SaBoi1114514/cbzimiao/refs/heads/main/katAimbot", true"))()
+  	end
+})
+
+Tab:AddButton({
+	Name = "(未测试过)预判自瞄(按v启动)",
+	Callback = function()
+      	loadstring(game:HttpGet("https://raw.githubusercontent.com/SaBoi1114514/cbzimiao/refs/heads/main/yupanzimiao", true))()
+  	end
+})
+
+OrionLib:MakeNotification({
+	Name = "Nyano_Lua",
+	Content = "欢迎使用Nyano_Lua脚本",
+	Image = "rbxassetid://4483345998",
+	Time = 2
+})
+
+MiaoLib:Init()

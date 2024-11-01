@@ -1,0 +1,7 @@
+for _, weapon in pairs(game:GetService("ReplicatedStorage").Weapons:GetChildren()) do
+    if weapon:FindFirstChild("Spread") then
+        for _, v in pairs(weapon:FindFirstChild("Spread"):GetChildren()) do
+            v.Value = 0
+        end          
+    end
+end
